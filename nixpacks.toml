@@ -1,2 +1,5 @@
 [phases.setup]
-nixPkgs = ["python311", "mesa", "glib"]
+nixPkgs = ["mesa", "libGL", "glib"]
+ 
+[start]
+cmd = "gunicorn app:app --bind 0.0.0.0:$PORT"
