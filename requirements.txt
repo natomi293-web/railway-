@@ -1,6 +1,5 @@
 Flask
 gunicorn
-opencv-python-headless
 inference-sdk
 numpy
 Pillow
