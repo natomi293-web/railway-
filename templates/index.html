@@ -1,24 +1,30 @@
+HTML
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Roboflow Detection</title>
+	<meta charset="UTF-8">
+	<title>画像推論</title>
 </head>
 <body>
-
-    <h1>画像推論</h1>
-
-    <form
-        action="/predict"
-        method="post"
-        enctypeage"
-            accept="image/*"
-            required>
-
-        <button type="submit">
-            推論開始
-        </button>
-
-    </form>
-
+ 
+	<h1>画像推論</h1>
+ 
+	/predict
+ 
+		<input
+			type="file"
+			name="image"
+			accept="image/*"
+			required
+		>
+ 
+		<br><br>
+ 
+		<button type="submit">
+			推論開始
+		</button>
+ 
+	</form>
+ 
 </body>
 </html>
