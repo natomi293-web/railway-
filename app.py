@@ -29,12 +29,12 @@ api_key=API_KEY
 
 @app.route("/")
 def index():
-return render_template("index.html")
+	return render_template("index.html")
 
 @app.route("/predict", methods=["POST"])
 def predict():
 
-if "image" not in request.files:
+	if "image" not in request.files:
 return "画像が選択されていません"
 
 file = request.files["image"]
