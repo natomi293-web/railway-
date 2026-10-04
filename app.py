@@ -35,12 +35,12 @@ def index():
 def predict():
 
 	if "image" not in request.files:
-return "画像が選択されていません"
+	return "画像が選択されていません"
 
-file = request.files["image"]
+	file = request.files["image"]
 
-if file.filename == "":
-return "画像が選択されていません"
+	if file.filename == "":
+	return "画像が選択されていません"
 
 unique_id = str(uuid.uuid4())
 
