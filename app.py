@@ -20,7 +20,7 @@ if not API_KEY:
 	raise ValueError("ROBOFLOW_API_KEY が設定されていません")
 
 if not MODEL_ID:
-raise ValueError("MODEL_ID が設定されていません")
+	raise ValueError("MODEL_ID が設定されていません")
 
 CLIENT = InferenceHTTPClient(
 api_url="https://detect.roboflow.com",
