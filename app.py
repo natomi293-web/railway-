@@ -2,19 +2,11 @@ import os
 import uuid
  
 from PIL import Image, ImageDraw
- 
-from flask import (
-Flask,
-render_template,
-request,
-url_for
-)
- 
+from flask import Flask, render_template, request, url_for
 from inference_sdk import InferenceHTTPClient
  
 app = Flask(__name__)
  
-# Railway起動時にフォルダ作成
 UPLOAD_FOLDER = "uploads"
 STATIC_RESULTS = "static/results"
  
@@ -31,16 +23,13 @@ if not MODEL_ID:
 raise ValueError("MODEL_ID が設定されていません")
  
 CLIENT = InferenceHTTPClient(
-
 api_url="https://detect.roboflow.com",
-  api_key=API_KEY
+api_key=API_KEY
 )
- 
  
 @app.route("/")
 def index():
 return render_template("index.html")
- 
  
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -67,23 +56,19 @@ STATIC_RESULTS,
 output_filename
 )
  
-# 画像保存
 file.save(input_path)
  
-# Roboflow推論
 result = CLIENT.infer(
 input_path,
 model_id=MODEL_ID
 )
  
-# Pillowで画像を開く
 img = Image.open(input_path)
 draw = ImageDraw.Draw(img)
  
 predictions = result.get("predictions", [])
  
 for pred in predictions:
- 
 x = int(pred["x"])
 y = int(pred["y"])
 w = int(pred["width"])
@@ -98,14 +83,12 @@ y1 = int(y - h / 2)
 x2 = int(x + w / 2)
 y2 = int(y + h / 2)
  
-# 枠描画
 draw.rectangle(
 [(x1, y1), (x2, y2)],
 outline="lime",
 width=3
 )
  
-# ラベル描画
 label = f"{class_name} {confidence:.2f}"
  
 draw.text(
@@ -114,7 +97,6 @@ label,
 fill="lime"
 )
  
-# 保存
 img.save(output_path)
  
 return render_template(
@@ -126,9 +108,7 @@ filename=f"results/{output_filename}"
 detections=len(predictions)
 )
  
- 
 if __name__ == "__main__":
- 
 port = int(os.environ.get("PORT", 5000))
  
 app.run(
