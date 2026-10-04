@@ -31,8 +31,9 @@ if not MODEL_ID:
 raise ValueError("MODEL_ID が設定されていません")
  
 CLIENT = InferenceHTTPClient(
+
 api_url="https://detect.roboflow.com",
-api_key=API_KEY
+  api_key=API_KEY
 )
  
  
