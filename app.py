@@ -17,7 +17,7 @@ API_KEY = os.getenv("ROBOFLOW_API_KEY")
 MODEL_ID = os.getenv("MODEL_ID")
 
 if not API_KEY:
-raise ValueError("ROBOFLOW_API_KEY が設定されていません")
+	raise ValueError("ROBOFLOW_API_KEY が設定されていません")
 
 if not MODEL_ID:
 raise ValueError("MODEL_ID が設定されていません")
