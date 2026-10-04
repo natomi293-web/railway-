@@ -1,2 +1,11 @@
 [phases.setup]
-nixPkgs = ["mesa", "libglvnd", "glib"]
+nixPkgs = [
+"python311",
+"gcc",
+"glib",
+"libGL",
+"libglibutil"
+]
+ 
+[start]
+cmd = "gunicorn app:app"
