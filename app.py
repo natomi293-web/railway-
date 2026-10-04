@@ -42,76 +42,75 @@ def predict():
 	if file.filename == "":
 		return "画像が選択されていません"
 
-unique_id = str(uuid.uuid4())
+	unique_id = str(uuid.uuid4())
 
-input_path = os.path.join(
-UPLOAD_FOLDER,
-f"{unique_id}.jpg"
-)
+	input_path = os.path.join(
+	UPLOAD_FOLDER,
+	f"{unique_id}.jpg"
+	)
 
-output_filename = f"{unique_id}_result.jpg"
+	output_filename = f"{unique_id}_result.jpg"
 
-output_path = os.path.join(
-STATIC_RESULTS,
-output_filename
-)
+	output_path = os.path.join(
+	STATIC_RESULTS,
+	output_filename
+	)
 
-file.save(input_path)
+	file.save(input_path)
 
-result = CLIENT.infer(
-input_path,
-model_id=MODEL_ID
-)
+	result = CLIENT.infer(
+	input_path,
+	model_id=MODEL_ID
+	)
 
-img = Image.open(input_path)
-draw = ImageDraw.Draw(img)
+	img = Image.open(input_path)
+	draw = ImageDraw.Draw(img)
 
-predictions = result.get("predictions", [])
+	predictions = result.get("predictions", [])
 
-for pred in predictions:
-x = int(pred["x"])
-y = int(pred["y"])
-w = int(pred["width"])
-h = int(pred["height"])
+	for pred in predictions:
+		x = int(pred["x"])
+		y = int(pred["y"])
+		w = int(pred["width"])
+		h = int(pred["height"])
 
-class_name = pred["class"]
-confidence = pred["confidence"]
+		class_name = pred["class"]
+		confidence = pred["confidence"]
 
-x1 = int(x - w / 2)
-y1 = int(y - h / 2)
+		x1 = int(x - w / 2)
+		y1 = int(y - h / 2)
 
-x2 = int(x + w / 2)
-y2 = int(y + h / 2)
+		x2 = int(x + w / 2)
+		y2 = int(y + h / 2)
+		draw.rectangle(
+			[(x1, y1), (x2, y2)],
+			outline="lime",
+			width=3
+		)
 
-draw.rectangle(
-[(x1, y1), (x2, y2)],
-outline="lime",
-width=3
-)
+		label = f"{class_name} {confidence:.2f}"
 
-label = f"{class_name} {confidence:.2f}"
+		draw.text(
+			(x1, max(0, y1 - 20)),
+			label,
+			fill="lime"
+	)
 
-draw.text(
-(x1, max(0, y1 - 20)),
-label,
-fill="lime"
-)
+	img.save(output_path)
 
-img.save(output_path)
-
-return render_template(
-"result.html",
-image_url=url_for(
-"static",
-filename=f"results/{output_filename}"
-),
-detections=len(predictions)
-)
+	return render_template(
+	"result.html",
+	image_url=url_for(
+	"static",
+	filename=f"results/{output_filename}"
+	),
+	detections=len(predictions)
+	)
 
 if __name__ == "__main__":
-port = int(os.environ.get("PORT", 5000))
+	port = int(os.environ.get("PORT", 5000))
 
-app.run(
-host="0.0.0.0",
-port=port
-)
+	app.run(
+	host="0.0.0.0",
+	port=port
+	)
