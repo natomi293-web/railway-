@@ -1,41 +1,39 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>画像推論1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>画像推論</title>
 </head>
 <body>
 
-	<h1>画像推論</h1>
+<h1>画像推論</h1>
 
-	<form action="/predict"
-		method="post"
-		enctype="multipart/form-data">
-		<input
-			type="file"
-			id="image"
-			name="image"
-			accept="image/*"
-			required>
+<form action="/predict"
+type="file"
+id="image"
+name="image"
+accept="image/*"
+required
+style="display:none;">
 
-		<label for="image"
-	style="padding:10px 20px;
-	background:#0078d4;
-	color:white;
-				border-radius:5px;
-	cursor:pointer;
-	display:inline-block;">
-			画像を選択
-		</label>
+<label for="image"
+style="padding:10px 20px;
+background:#0078d4;
+color:white;
+border-radius:5px;
+cursor:pointer;
+display:inline-block;">
+画像を選択
+</label>
 
-		<br><br>
+<br><br>
 
-		<button type="submit">
-			推論開始
-		</button>
+<button type="submit">
+推論開始
+</button>
 
-	</form>
+</form>
 
 </body>
 </html>
