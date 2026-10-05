@@ -1,18 +1,24 @@
-<form action="/input
-		type="file"
-		id="image"
-		name="image"
-		accept="image/*"
-		required
+<body>
+
+	<h1>画像推論</h1>
+
+	<form action="/predict"
+		method="post"
+		enctype="multipart/form-data">
+			<input
+			type="file"
+			id="image"
+			name="image"
+			accept="image/*"
+			required
 		style="display:none;">
 
 	<label for="image"
-		style="
-			padding:10px 20px;
+	style="padding:10px 20px;
 	background:#0078d4;
 			color:white;
-			cursor:pointer;
-			border-radius:5px;">
+			border-radius:5px;
+	cursor:pointer;">
 		画像を選択
 	</label>
 
@@ -23,3 +29,6 @@
 	</button>
 
 </form>
+
+
+</body>
