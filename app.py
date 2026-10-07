@@ -76,6 +76,8 @@ def predict():
 
 	result = response.json()
 
+	print(result)
+	
 	img = Image.open(input_path)
 	draw = ImageDraw.Draw(img)
 
