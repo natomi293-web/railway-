@@ -56,7 +56,6 @@ def predict():
 
 	img = Image.open(file)
 
-	#EXIF回転補正
 	img = ImageOps.exif_transpose(img)
 
 	img.save(input_path)
