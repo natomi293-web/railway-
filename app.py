@@ -3,7 +3,7 @@ import uuid
 import base64
 import requests
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 from flask import Flask, render_template, request, url_for
 
 app = Flask(__name__)
@@ -54,7 +54,12 @@ def predict():
 	output_filename
 	)
 
-	file.save(input_path)
+	img = Image.open(file)
+ 
+	# EXIF回転補正
+	img = ImageOps.exif_transpose(img)
+
+	img.save(input_path)
 
 	with open(input_path, "rb") as image_file:
 		image_bytes = image_file.read()
