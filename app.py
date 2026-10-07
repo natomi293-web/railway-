@@ -55,7 +55,7 @@ def predict():
 	)
 
 	file.save(input_path)
-
+	
 	with open(input_path, "rb") as image_file:
 		image_bytes = image_file.read()
 
