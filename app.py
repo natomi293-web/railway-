@@ -3,7 +3,7 @@ import uuid
 import base64
 import requests
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 from flask import Flask, render_template, request, url_for
 
 app = Flask(__name__)
@@ -78,7 +78,7 @@ def predict():
 
 	print(result)
 	
-	img = Image.open(input_path)
+	img = ImageOps.exif_transpose(Image.open(input_path))
 	draw = ImageDraw.Draw(img)
 
 	predictions = result.get("predictions", [])
