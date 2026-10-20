@@ -56,7 +56,9 @@ def predict():
 
 	file.save(input_path)
 
-	img = ImageOps.exif_transpose(Image.open(input_path))
+	img = Image.open(input_path)
+	img = ImageOps.exif_transpose(img)
+	img.save(input_path)
 
 	with open(input_path, "rb") as image_file:
 		image_bytes = image_file.read()
@@ -81,6 +83,7 @@ def predict():
 	print(result)
 	
 	img = Image.open(input_path)
+	img = ImageOps.exif_transpose(img)
 	draw = ImageDraw.Draw(img)
 
 	predictions = result.get("predictions", [])
